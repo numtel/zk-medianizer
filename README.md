@@ -3,6 +3,8 @@
 Uses [BokkyPooBah's Red-Black Binary Search Tree library](https://github.com/bokkypoobah/BokkyPooBahsRedBlackTreeLibrary) to store a sorted list of counts for each integer.
 
 ```solidity
+import "solidity-median-library/MedianLibrary.sol";
+
 contract MedianLibraryTest {
   using MedianLibrary for MedianLibrary.Data;
 
