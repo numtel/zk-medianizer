@@ -62,4 +62,26 @@ contract MedianLibraryTest is Test {
 
     assertEq(data.median(), (count + 1) / 2);
   }
+
+  function testBucket() public {
+    data.set(address(1), 1);
+    data.set(address(2), 1);
+    data.set(address(3), 1);
+    data.set(address(4), 4);
+    data.set(address(5), 4);
+    assertEq(data.median(), 1);
+  }
+
+  function testBucket2() public {
+    data.set(address(1), 1);
+    data.set(address(2), 1);
+    data.set(address(3), 1);
+    data.set(address(4), 3);
+    data.set(address(5), 5);
+    data.set(address(6), 6);
+    data.set(address(7), 6);
+    data.set(address(8), 7);
+    assertEq(data.median(), 4);
+  }
+
 }

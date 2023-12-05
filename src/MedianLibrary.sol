@@ -49,7 +49,7 @@ library MedianLibrary {
     }
     if(isEven && soFar == midPos) {
       curPos = (curPos + self.tree.next(curPos)) / 2;
-    } else if(!isEven) {
+    } else if(!isEven && soFar <= midPos) {
       curPos = self.tree.next(curPos);
     }
     return curPos;
