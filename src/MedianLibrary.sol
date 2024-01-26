@@ -10,27 +10,27 @@ library MedianLibrary {
   struct Data {
     BokkyPooBahsRedBlackTreeLibrary.Tree tree;
     mapping(uint => uint) counts;
-    mapping(address => uint) values;
+    mapping(uint256 => uint) values;
     uint totalCount;
   }
 
   // Value must be >0, except if a value is already set,
-  // passing value of 0 will unset for that account.
-  function set(Data storage self, address account, uint value) internal {
-    if(self.values[account] != 0) {
-      if(self.values[account] == value) return;
+  // passing value of 0 will unset for that id.
+  function set(Data storage self, uint256 id, uint value) internal {
+    if(self.values[id] != 0) {
+      if(self.values[id] == value) return;
       // Changing existing value, remove old
       self.totalCount--;
-      self.counts[self.values[account]]--;
-      if(self.counts[self.values[account]] == 0) {
-        self.tree.remove(self.values[account]);
+      self.counts[self.values[id]]--;
+      if(self.counts[self.values[id]] == 0) {
+        self.tree.remove(self.values[id]);
       }
       if(value == 0) return;
     }
     require(value > 0);
     self.totalCount++;
     self.counts[value]++;
-    self.values[account] = value;
+    self.values[id] = value;
     if(!self.tree.exists(value)) {
       self.tree.insert(value);
     }

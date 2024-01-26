@@ -11,9 +11,9 @@ contract MedianLibraryTest {
   MedianLibrary.Data data;
 
   // Value must be >0, except if a value is already set,
-  // passing value of 0 will unset for that account.
-  function set(address account, uint value) public {
-    data.set(account, value);
+  // passing value of 0 will unset for that id.
+  function set(uint256 id, uint value) public {
+    data.set(id, value);
   }
 
   function median() public view returns (uint) {
