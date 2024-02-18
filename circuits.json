@@ -1,0 +1,8 @@
+{
+  "median": {
+    "file": "circuits/median",
+    "template": "Median",
+    "pubs": [],
+    "params": [3]
+  }
+}

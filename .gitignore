@@ -1,6 +1,9 @@
 # Compiler files
+build/
+main/
 cache/
 out/
+ptau/
 
 # Ignores development broadcast logs
 !/broadcast
@@ -12,5 +15,7 @@ docs/
 
 # Dotenv file
 .env
+
+node_modules/
 
 *.swp
