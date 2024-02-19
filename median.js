@@ -31,43 +31,24 @@ function verifyMedian(arr, givenMedian) {
     }
   });
 
-  if ((arr.length % 2) === 1) {
-    if(equalTo >= 1 && lessThan === greaterThan) return true;
-    else if(equalTo > 1) {
-      while(equalTo > 1) {
-        if(lessThan < greaterThan) {
-          lessThan++;
-          equalTo--;
-        } else if(lessThan > greaterThan) {
-          greaterThan++;
-          equalTo--;
-        } else {
-          return true;
-        }
+  if(equalTo >= 1 && greaterThan === lessThan) return true;
+  else if(equalTo > 1) {
+    while(equalTo > 1) {
+      if(lessThan < greaterThan) {
+        nearestUnder = givenMedian;
+        lessThan++;
+        equalTo--;
+      } else if(lessThan > greaterThan) {
+        nearestOver = givenMedian;
+        greaterThan++;
+        equalTo--;
+      } else {
+        return true;
       }
-      return lessThan === greaterThan;
-    } else return false;
-    return equalTo >= 1 && lessThan === greaterThan;
-  } else {
-    if(equalTo >= 1 && greaterThan === lessThan) return true;
-    else if(equalTo > 1) {
-      while(equalTo > 1) {
-        if(lessThan < greaterThan) {
-          nearestUnder = givenMedian;
-          lessThan++;
-          equalTo--;
-        } else if(lessThan > greaterThan) {
-          nearestOver = givenMedian;
-          greaterThan++;
-          equalTo--;
-        } else {
-          return true;
-        }
-      }
-      return lessThan === greaterThan;
-    } else {
-      return (lessThan === greaterThan) && (givenMedian === (nearestOver + nearestUnder) / 2);
     }
+    return lessThan === greaterThan;
+  } else {
+    return (lessThan === greaterThan) && (givenMedian === (nearestOver + nearestUnder) / 2);
   }
 }
 
@@ -80,6 +61,7 @@ function testMedian(arr, median) {
 }
 
 testMedian([0,0,1,2,3,3,5], 3);
+testMedian([0,1,2,3,3,5], 3);
 testMedian([1,2,3,3,5], 3);
 testMedian([1,2,3,3,3], 3);
 testMedian([1,2,3,3,3,5,6], 3);

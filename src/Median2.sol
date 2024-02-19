@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+// Linear time O(n) median verification algorithm
+// Author: numtel <ben@latenightsketches.com>
 library Median2 {
   error UNEXPECTED_ERROR();
 
@@ -32,42 +34,24 @@ library Median2 {
       }
     }
 
-    if ((values.length % 2) == 1) {
-      if(countEqual >= 1 && countUnder == countOver) return true;
-      else if(countEqual > 1) {
-        while(countEqual > 1) {
-          if(countUnder < countOver) {
-            countUnder++;
-            countEqual--;
-          } else if(countUnder > countOver) {
-            countOver++;
-            countEqual--;
-          } else {
-            return true;
-          }
+    if(countEqual >= 1 && countOver == countUnder) return true;
+    else if(countEqual > 1) {
+      while(countEqual > 1) {
+        if(countUnder < countOver) {
+          nearestUnder = newMedian;
+          countUnder++;
+          countEqual--;
+        } else if(countUnder > countOver) {
+          nearestOver = newMedian;
+          countOver++;
+          countEqual--;
+        } else {
+          return true;
         }
-        return countUnder == countOver;
-      } else return false;
-    } else {
-      if(countEqual >= 1 && countOver == countUnder) return true;
-      else if(countEqual > 1) {
-        while(countEqual > 1) {
-          if(countUnder < countOver) {
-            nearestUnder = newMedian;
-            countUnder++;
-            countEqual--;
-          } else if(countUnder > countOver) {
-            nearestOver = newMedian;
-            countOver++;
-            countEqual--;
-          } else {
-            return true;
-          }
-        }
-        return countUnder == countOver;
-      } else {
-        return (countUnder == countOver) && (newMedian == (nearestOver + nearestUnder) / 2);
       }
+      return countUnder == countOver;
+    } else {
+      return (countUnder == countOver) && (newMedian == (nearestOver + nearestUnder) / 2);
     }
   }
 
