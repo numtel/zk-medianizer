@@ -3,11 +3,17 @@ pragma solidity ^0.8.0;
 
 import {Test, console2} from "forge-std/Test.sol";
 import {MedianLibrary} from "../src/MedianLibrary.sol";
+import {Median2} from "../src/Median2.sol";
 
 contract MedianLibraryTest is Test {
   using MedianLibrary for MedianLibrary.Data;
 
   MedianLibrary.Data data;
+
+  function testFoo() public {
+    Median2 foo = new Median2();
+    console2.logBytes32(foo.test());
+  }
 
   function testBasic5() public {
     data.set(1, 1);
