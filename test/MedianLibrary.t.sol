@@ -4,10 +4,25 @@ pragma solidity ^0.8.0;
 import {Test, console2} from "forge-std/Test.sol";
 import {MedianLibrary} from "../src/MedianLibrary.sol";
 
-contract MedianLibraryTest is Test {
+contract Example {
   using MedianLibrary for MedianLibrary.Data;
 
   MedianLibrary.Data data;
+
+  function set(uint256 id, uint value) external {
+    data.set(id, value);
+  }
+  function median() external view returns (uint) {
+    return data.median();
+  }
+}
+
+contract MedianLibraryTest is Test {
+  Example data;
+
+  function setUp() public {
+    data = new Example();
+  }
 
   function testBasic5() public {
     data.set(1, 1);
@@ -55,6 +70,7 @@ contract MedianLibraryTest is Test {
 
   function testMany(uint count) public {
     count = bound(count, 1, 100);
+    // count = 1000;
 
     for(uint i = 1; i < count + 1; i++) {
       data.set(i, i);
