@@ -3,6 +3,6 @@
     "file": "circuits/median",
     "template": "Median",
     "pubs": [],
-    "params": [3]
+    "params": [4]
   }
 }
