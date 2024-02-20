@@ -4,10 +4,8 @@ pragma solidity ^0.8.0;
 // Linear time O(n) median verification algorithm
 // Author: numtel <ben@latenightsketches.com>
 library Median2 {
-  error UNEXPECTED_ERROR();
-
   function validate(uint256[] memory values, uint256 newMedian) internal pure returns(bool) {
-    // Verify that new median is correct without sorting the array
+    uint256 countZero;
     uint256 countUnder;
     uint256 countOver;
     uint256 countEqual;
@@ -16,7 +14,7 @@ library Median2 {
 
     for(uint i = 0; i < values.length; i++) {
       if(values[i] == 0) {
-        // noop
+        countZero++;
       } else if(values[i] > newMedian) {
         countOver++;
         if(values[i] < nearestOver) {
@@ -29,14 +27,12 @@ library Median2 {
         }
       } else if(values[i] == newMedian) {
         countEqual++;
-      } else {
-        revert UNEXPECTED_ERROR();
       }
     }
 
-    if(countEqual >= 1 && countOver == countUnder) return true;
-    else if(countEqual > 1) {
-      while(countEqual > 1) {
+    // Balance out duplicates of the median
+    if(countEqual > 1 && countOver != countUnder) {
+      while(countEqual > 1 && countOver != countUnder) {
         if(countUnder < countOver) {
           nearestUnder = newMedian;
           countUnder++;
@@ -45,14 +41,13 @@ library Median2 {
           nearestOver = newMedian;
           countOver++;
           countEqual--;
-        } else {
-          return true;
         }
       }
-      return countUnder == countOver;
-    } else {
-      return (countUnder == countOver) && (newMedian == (nearestOver + nearestUnder) / 2);
     }
-  }
 
+    bool countIsOdd = (values.length - countZero) % 2 == 1;
+    return (countUnder == countOver)
+      && (countIsOdd
+        || (countEqual >= 2 || newMedian == (nearestOver + nearestUnder) / 2));
+  }
 }

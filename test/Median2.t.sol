@@ -94,6 +94,16 @@ contract Median2Test is Test {
     testMedian(3);
   }
 
+  function testBasic5x() public {
+    values.push(1);
+    values.push(2);
+    values.push(3);
+    values.push(3);
+    values.push(6);
+    values.push(6);
+    testMedian(3);
+  }
+
   function testBasic6() public {
     values.push(1);
     values.push(2);
