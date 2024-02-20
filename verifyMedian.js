@@ -41,9 +41,10 @@ export default function verifyMedian(values, newMedian) {
   }
 
   const countIsOdd = (values.length - countZero) % 2 === 1;
-  return (countUnder === countOver)
-    && (countIsOdd
-      || (countEqual >= 2 || newMedian === (nearestOver + nearestUnder) / 2));
+  return (countUnder === countOver) &&
+    (countIsOdd
+      || countEqual >= 2
+      || newMedian === (nearestOver + nearestUnder) / 2);
 }
 
 function testMedian(values, median) {

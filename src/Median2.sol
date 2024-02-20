@@ -44,8 +44,9 @@ library Median2 {
     }
 
     bool countIsOdd = (values.length - countZero) % 2 == 1;
-    return (countUnder == countOver)
-      && (countIsOdd
-        || (countEqual >= 2 || newMedian == (nearestOver + nearestUnder) / 2));
+    return (countUnder == countOver) &&
+      (countIsOdd
+        || countEqual >= 2
+        || newMedian == (nearestOver + nearestUnder) / 2);
   }
 }
