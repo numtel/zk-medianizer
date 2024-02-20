@@ -35,19 +35,18 @@ template Median(MAX_COUNT) {
     }
   }
 
-  if(countEqual > 1 && countOver != countUnder) {
-    while(countEqual > 1 && countOver != countUnder) {
-      if(countUnder < countOver) {
-        nearestUnder = newMedian;
-        countUnder++;
-        countEqual--;
-      } else if(countUnder > countOver) {
-        nearestOver = newMedian;
-        countOver++;
-        countEqual--;
-      }
+  while(countEqual > 1 && countOver != countUnder) {
+    if(countUnder < countOver) {
+      nearestUnder = newMedian;
+      countUnder++;
+      countEqual--;
+    } else if(countUnder > countOver) {
+      nearestOver = newMedian;
+      countOver++;
+      countEqual--;
     }
   }
+
   var countIsOdd = (MAX_COUNT - countZero) % 2;
   log(countOver, countEqual, countUnder, nearestUnder, nearestOver, countIsOdd);
 

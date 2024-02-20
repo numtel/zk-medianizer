@@ -31,17 +31,15 @@ library Median2 {
     }
 
     // Balance out duplicates of the median
-    if(countEqual > 1 && countOver != countUnder) {
-      while(countEqual > 1 && countOver != countUnder) {
-        if(countUnder < countOver) {
-          nearestUnder = newMedian;
-          countUnder++;
-          countEqual--;
-        } else if(countUnder > countOver) {
-          nearestOver = newMedian;
-          countOver++;
-          countEqual--;
-        }
+    while(countEqual > 1 && countOver != countUnder) {
+      if(countUnder < countOver) {
+        nearestUnder = newMedian;
+        countUnder++;
+        countEqual--;
+      } else if(countUnder > countOver) {
+        nearestOver = newMedian;
+        countOver++;
+        countEqual--;
       }
     }
 
