@@ -2,7 +2,7 @@
   "median": {
     "file": "circuits/median",
     "template": "Median",
-    "pubs": [],
-    "params": [4]
+    "pubs": ["doubleMedian"],
+    "params": [10, 69]
   }
 }

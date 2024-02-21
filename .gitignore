@@ -19,3 +19,6 @@ docs/
 node_modules/
 
 *.swp
+
+# Auto generated
+test/median.circom

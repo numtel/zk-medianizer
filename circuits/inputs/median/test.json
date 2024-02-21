@@ -1,6 +1,11 @@
 {
   "values": [
-    1, 3, 7, 3
+    2, 18, 6, 10, 0,
+    0,0,0,0,0
   ],
-  "newMedian": 3
+  "doubleMedian": 8,
+  "nearestOver": 10,
+  "nearestUnder": 6,
+  "equalAbove": 0,
+  "equalBelow": 0
 }
