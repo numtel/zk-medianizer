@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "./PoseidonT3.sol";
+
 // Linear time O(n) median verification algorithm
 // Author: numtel <ben@latenightsketches.com>
 library Median2 {
@@ -48,5 +50,17 @@ library Median2 {
       (countIsOdd
         || countEqual >= 2
         || newMedian == (nearestOver + nearestUnder) / 2);
+  }
+
+  function calcHash(uint256[] memory input) internal pure returns(uint256) {
+    uint256 lastHash;
+    uint256[2] memory curValues;
+
+    for(uint256 i = 0; i < input.length; i++) {
+      curValues[0] = input[i];
+      curValues[1] = lastHash;
+      lastHash = PoseidonT3.hash(curValues);
+    }
+    return lastHash;
   }
 }

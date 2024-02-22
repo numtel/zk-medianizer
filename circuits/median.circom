@@ -1,6 +1,6 @@
 pragma circom 2.1.5;
 
-// include "poseidon.circom";
+include "poseidon.circom";
 include "comparators.circom";
 include "gates.circom";
 
@@ -16,8 +16,10 @@ template Median(COUNT, BITS) {
   signal input nearestOver;
   signal input equalAbove;
   signal input equalBelow;
-//   signal output hash;
+  signal output hash;
 
+  var hashParts[COUNT + 1];
+  component calcHash[COUNT];
   var zeroes[COUNT + 1];
   component testZero[COUNT];
   var overs[COUNT + 1];
@@ -32,6 +34,10 @@ template Median(COUNT, BITS) {
   component testCloserUnder[COUNT];
 
   for(var i=0; i<COUNT; i++) {
+    calcHash[i] = Poseidon(2);
+    calcHash[i].inputs <== [values[i], hashParts[i]];
+    hashParts[i + 1] = calcHash[i].out;
+
     testZero[i] = IsZero();
     testZero[i].in <== values[i];
     zeroes[i + 1] = zeroes[i] + testZero[i].out;
@@ -81,6 +87,8 @@ template Median(COUNT, BITS) {
   overEqualsUnder === 1;
   oddOrAtLeast2EqualOrEvenBetweener === 1;
 
+  hash <== hashParts[COUNT];
+
   log(
     "\nzero", zeroes[COUNT],
     "\novers", totalOver,
@@ -95,9 +103,6 @@ template Median(COUNT, BITS) {
     "\nnearestAvg", nearestAvg,
     "\n\n"
   );
-
-  // TODO use Poseidon(2)([x,y]) to build cumulatively
-//   hash <== Poseidon(COUNT)(values);
 
 }
 

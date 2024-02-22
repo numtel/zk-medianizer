@@ -157,5 +157,21 @@ contract Median2Test is Test {
     }
     testMedian(500);
   }
+
+  function testHash() public {
+    uint256[] memory input = new uint256[](10);
+    input[0] = 2;
+    input[1] = 18;
+    input[2] = 6;
+    input[3] = 10;
+    input[4] = 0;
+    input[5] = 0;
+    input[6] = 0;
+    input[7] = 0;
+    input[8] = 0;
+    input[9] = 0;
+    uint256 hash = Median2.calcHash(input);
+    console2.log(hash);
+  }
 }
 
