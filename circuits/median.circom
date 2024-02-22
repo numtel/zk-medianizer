@@ -9,7 +9,7 @@ include "gates.circom";
 template Median(COUNT, BITS) {
   // values input are double their actual values in order to have full precision
   // in the case of the median being between two subsequent integers
-  //  e.g. 3,4 => 3.5 doubled is 6,8 => 4
+  //  e.g. 3,4 => 3.5 doubled is 6,8 => 7
   signal input values[COUNT];
   signal input doubleMedian;
   signal input nearestUnder;
